@@ -11,7 +11,9 @@ var localStrategy = require("passport-local");
 
 
 var Bank = require("./models/bank");
+var User = require("./models/user");
 var bankRoutes = require("./routes/banks");
+var indexRoutes = require("./routes/index");
 
 var url = "mongodb://mohit:mohit@ds161459.mlab.com:61459/fylebankdb";
 mongoose.connect(url);
@@ -37,8 +39,15 @@ app.use(function(req, res, next){
     next();
 });
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
+app.use("/", indexRoutes);
 app.use("/banks", bankRoutes);
+
 //Start call
 app.get("/" , function(req,res){
     res.render("landing");
@@ -49,10 +58,10 @@ app.get("/search" , function(req, res){
     if(req.query.ifsc){
         Bank.findOne({ifsc: req.query.ifsc.toUpperCase()},function(err, Bank){
        if(err){
-           console.log(err);
+           res.render("notfound");
        }
        else{
-            res.render("banks/ifsc", {bank: Bank});
+            res.render("banks/ifsc", {bank: Bank, currentUser: req.user});
        }
     });
     }
@@ -60,9 +69,9 @@ app.get("/search" , function(req, res){
         if(req.query.bankname && req.query.city){
             Bank.find({bank_name: req.query.bankname.toUpperCase() , city: req.query.city.toUpperCase()}, function(err , Banks){
                 if(err){
-                    console.log(err);
+                    res.render("notfound");
                 }else{
-                    res.render("banks/branches" , {banks: Banks})
+                    res.render("banks/branches" , {banks: Banks, currentUser: req.user})
                 }
             })
             
