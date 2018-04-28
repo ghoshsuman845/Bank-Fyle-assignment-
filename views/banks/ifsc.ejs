@@ -1,0 +1,17 @@
+<% include ../partials/header%>
+
+
+    <p><%= bank.ifsc %></p>
+    <div class="card">
+        <h5 class="card-header"><%= bank.bank_name%></h5>
+        <div class="card-body">
+            <h5 class="card-title">Bank Information</h5>
+            
+            <p class="card-text">Address: <%= bank.address%> , <%= bank.city%> , <%= bank.district%> , <b><%= bank.state%></b></p>
+            <p>Branch: <%= bank.branch%></p>
+            <p>Bank ID: <%= bank.bank_id%></p>
+            <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+        </div>
+    </div>
+       
+<% include ../partials/footer%>

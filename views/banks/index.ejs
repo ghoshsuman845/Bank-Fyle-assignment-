@@ -1,0 +1,48 @@
+<% include ../partials/header%>
+
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to BankGuide</h1>
+            <p>
+                You can search bank info in two ways
+            </p>
+        </div>
+    </header>
+    <form method="get" action="/search">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInput">IFSC CODE</label>
+              <input type="text" class="form-control mb-2" id="inlineFormInput" name="ifsc" placeholder="IFSC CODE">
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </div>
+        </div>
+    </form>
+    
+    <p>or</p>
+    
+    <form method="get" action="/search">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInput">Bank Name</label>
+              <input type="text" class="form-control mb-2" id="inlineFormInput" name="bankname" placeholder="Bank Name">
+            </div>
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">City</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend"></div>
+                <input type="text" class="form-control" id="inlineFormInputGroup" name="city" placeholder="city">
+              </div>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </div>
+        </div>
+    </form>
+    
+</div>
+
+<% include ../partials/footer%>

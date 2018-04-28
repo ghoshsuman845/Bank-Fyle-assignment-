@@ -1,0 +1,17 @@
+<% include ../partials/header%>
+<h3>Branches of <b><%=banks[0].bank_name%></b>[<%= banks[0].bank_id%>] in <%=banks[0].city%></h3>
+    <%banks.forEach(function(bank){%>
+        <div class="card">
+        <h5 class="card-header"><%= bank.branch%></h5>
+        <div class="card-body">
+            <h5 class="card-title">Branch Information</h5>
+            
+            <p class="card-text">Address: <%= bank.address%> , <%= bank.city%> , <%= bank.district%> , <b><%= bank.state%></b></p>
+            <p>IFSC code: <%= bank.ifsc%></p>
+            <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+        </div>
+        </div>
+        <p></p>
+    <% }); %>
+       
+<% include ../partials/footer%>
